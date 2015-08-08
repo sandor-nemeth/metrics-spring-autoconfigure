@@ -1,0 +1,7 @@
+language: java
+
+# verify the project
+script: mvn clean verify
+
+jdk:
+  - oraclejdk8
