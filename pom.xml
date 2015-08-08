@@ -154,11 +154,11 @@
         <configuration>
           <check>
             <!-- Per-class thresholds -->
-            <lineRate>80</lineRate>
-            <branchRate>80</branchRate>
+            <lineRate>75</lineRate>
+            <branchRate>75</branchRate>
             <!-- Project-wide thresholds -->
-            <totalLineRate>90</totalLineRate>
-            <totalBranchRate>90</totalBranchRate>
+            <totalLineRate>75</totalLineRate>
+            <totalBranchRate>75</totalBranchRate>
           </check>
         </configuration>
         <dependencies>
