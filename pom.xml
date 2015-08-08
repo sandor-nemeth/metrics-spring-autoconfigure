@@ -7,26 +7,69 @@
   <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>metrics-spring-autoconfigure</name>
-
   <!-- Project Description -->
+  <name>metrics-spring-autoconfigure</name>
+  <description>Spring Boot Autoconfiguration library for the metrics-spring library</description>
 
+  <inceptionYear>2015</inceptionYear>
+  <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure</url>
+
+  <developers>
+    <developer>
+      <email>sandor.nemeth.1986@gmail.com</email>
+      <name>Sandor Nemeth</name>
+      <url>https://github.com/sandor-nemeth</url>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure/issues</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
+
+  <ciManagement>
+    <system>Travis</system>
+    <url>https://travis-ci.org/sandor-nemeth/metrics-spring-autoconfigure</url>
+    <notifiers />
+  </ciManagement>
+
+  <scm>
+    <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure</url>
+    <connection>scm:git:git://github.com/sandor-nemeth/metrics-spring-autoconfigure.git</connection>
+    <developerConnection>scm:git:git@github.com:sandor-nemeth/metrics-spring-autoconfigure.git</developerConnection>
+  </scm>
 
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Plugin versions -->
-
+    <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
   </properties>
 
   <build>
-    <pluginManagement>
-
-    </pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${targetJdk}</source>
+            <target>${targetJdk}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+      </plugins>
   </build>
-
-
 
   <dependencies>
     <dependency>
