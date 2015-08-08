@@ -31,6 +31,11 @@
     </license>
   </licenses>
 
+  <organization>
+    <name>Sandor Nemeth</name>
+    <url>https://github.com/sandor-nemeth</url>
+  </organization>
+
   <issueManagement>
     <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure/issues</url>
     <system>GitHub Issues</system>
@@ -51,9 +56,8 @@
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <!-- Plugin versions -->
-    <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+    <license.licenseName>apache_v2</license.licenseName>
+    <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
   </properties>
 
   <build>
@@ -61,12 +65,38 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven-compiler-plugin.version}</version>
+          <version>3.3</version>
           <configuration>
             <source>${targetJdk}</source>
             <target>${targetJdk}</target>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>2.11</version>
+          <configuration>
+            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+            <properties>
+              <owner>Sandor Nemeth</owner>
+              <email>sandor.nemeth.1986@gmail.com</email>
+            </properties>
+            <excludes>
+              <exclude>**/README</exclude>
+              <exclude>LICENSE</exclude>
+              <exclude>src/test/resources/**</exclude>
+              <exclude>src/main/resources/**</exclude>
+              <exclude>pom.xml</exclude>
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
   </build>
