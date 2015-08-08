@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sandornemeth</groupId>
@@ -44,68 +45,155 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/sandor-nemeth/metrics-spring-autoconfigure</url>
-    <notifiers />
+    <notifiers/>
   </ciManagement>
 
   <scm>
     <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure</url>
     <connection>scm:git:git://github.com/sandor-nemeth/metrics-spring-autoconfigure.git</connection>
-    <developerConnection>scm:git:git@github.com:sandor-nemeth/metrics-spring-autoconfigure.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:sandor-nemeth/metrics-spring-autoconfigure.git
+    </developerConnection>
   </scm>
 
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <license.licenseName>apache_v2</license.licenseName>
-    <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
+
   </properties>
 
   <build>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.3</version>
-          <configuration>
-            <source>${targetJdk}</source>
-            <target>${targetJdk}</target>
-            <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>com.mycila</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <version>2.11</version>
-          <configuration>
-            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-            <properties>
-              <owner>Sandor Nemeth</owner>
-              <email>sandor.nemeth.1986@gmail.com</email>
-            </properties>
-            <excludes>
-              <exclude>**/README</exclude>
-              <exclude>LICENSE</exclude>
-              <exclude>src/test/resources/**</exclude>
-              <exclude>src/main/resources/**</exclude>
-              <exclude>pom.xml</exclude>
-            </excludes>
-          </configuration>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${targetJdk}</source>
+          <target>${targetJdk}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>2.11</version>
+        <configuration>
+          <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+          <properties>
+            <owner>Sandor Nemeth</owner>
+            <email>sandor.nemeth.1986@gmail.com</email>
+          </properties>
+          <excludes>
+            <exclude>**/README</exclude>
+            <exclude>LICENSE</exclude>
+            <exclude>src/test/resources/**</exclude>
+            <exclude>src/main/resources/**</exclude>
+            <exclude>pom.xml</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Code validation -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+          <configLocation>${basedir}/checkstyle.xml</configLocation>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>6.9</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <effort>Max</effort>
+          <!-- Reports all bugs (other values are medium and max) -->
+          <threshold>Low</threshold>
+          <!-- Produces XML report -->
+          <xmlOutput>true</xmlOutput>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <check>
+            <!-- Per-class thresholds -->
+            <lineRate>80</lineRate>
+            <branchRate>80</branchRate>
+            <!-- Project-wide thresholds -->
+            <totalLineRate>90</totalLineRate>
+            <totalBranchRate>90</totalBranchRate>
+          </check>
           <executions>
             <execution>
+              <id>tests</id>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>coverage-tests</id>
+              <!-- The "verify" phase occurs just before "install" -->
+              <phase>verify</phase>
               <goals>
                 <goal>check</goal>
               </goals>
             </execution>
           </executions>
-        </plugin>
-      </plugins>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+              <goal>cpd-check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
