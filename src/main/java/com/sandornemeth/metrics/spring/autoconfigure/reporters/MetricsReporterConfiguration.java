@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure;
+package com.sandornemeth.metrics.spring.autoconfigure.reporters;
 
-import com.sandornemeth.metrics.spring.autoconfigure.metricsets.MetricSetConfiguration;
-import com.sandornemeth.metrics.spring.autoconfigure.reporters.MetricsReporterConfiguration;
-
-import com.codahale.metrics.MetricRegistry;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -28,12 +22,9 @@ import org.springframework.context.annotation.Import;
  *
  */
 @Configuration
-@ConditionalOnClass({MetricRegistry.class})
 @Import({
-    MetricsAnnotationConfiguration.class,
-    MetricSetConfiguration.class,
-    MetricsReporterConfiguration.class
+    ConsoleReporterConfiguration.class
 })
-public class MetricsAutoConfiguration {
+public class MetricsReporterConfiguration {
 
 }
