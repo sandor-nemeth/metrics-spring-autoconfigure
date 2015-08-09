@@ -3,5 +3,8 @@ language: java
 # verify the project
 script: mvn clean verify
 
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
+
 jdk:
   - oraclejdk8
