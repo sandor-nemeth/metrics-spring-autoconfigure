@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure;
+package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
+
+import com.sandornemeth.metrics.spring.autoconfigure.AbstractMetricsAutoconfigurationTestSupport;
 
 import org.junit.Test;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +29,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-public class JvmMetricsAutoConfigurationTest extends AbstractMetricsAutoconfigurationTestSupport {
+public class JvmMetricsSetConfigurationTest extends AbstractMetricsAutoconfigurationTestSupport {
 
   @Test
   public void shouldRegisterJvmMetrics() {

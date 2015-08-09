@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure;
+package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
 
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -28,9 +28,9 @@ public class MetricSetConfigurationTest {
 
   @Test
   public void testNullListPassedToSetMetricSetConfigurers() {
-    MetricsAutoConfiguration.MetricSetConfiguration
+    MetricSetConfiguration
         metricSetConfiguration =
-        new MetricsAutoConfiguration.MetricSetConfiguration();
+        new MetricSetConfiguration();
     metricSetConfiguration.setMetricSetConfigurers(null);
     List<MetricSetConfigurer> metricSetConfigurers =
         (List<MetricSetConfigurer>) ReflectionTestUtils

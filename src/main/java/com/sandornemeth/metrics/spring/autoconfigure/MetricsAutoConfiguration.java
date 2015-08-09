@@ -15,70 +15,23 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.jvm.BufferPoolMetricSet;
-import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
-import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
-import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
+import com.sandornemeth.metrics.spring.autoconfigure.metricsets.MetricSetConfiguration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.codahale.metrics.MetricRegistry;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 /**
  *
  */
 @Configuration
 @ConditionalOnClass({MetricRegistry.class})
-@Import({MetricsAnnotationConfiguration.class})
+@Import({MetricsAnnotationConfiguration.class,
+         MetricSetConfiguration.class
+})
 public class MetricsAutoConfiguration {
-
-  @Configuration
-  protected static class MetricSetConfiguration {
-
-    @Autowired
-    private MetricRegistry metricRegistry;
-
-    private List<MetricSetConfigurer> metricSetConfigurers = new ArrayList<>();
-
-    @Autowired(required = false)
-    public void setMetricSetConfigurers(Collection<MetricSetConfigurer> metricSetConfigurers) {
-      if (null != metricSetConfigurers) {
-        this.metricSetConfigurers.addAll(metricSetConfigurers);
-      }
-    }
-
-    @PostConstruct
-    public void initializeMetricSets() {
-      this.metricSetConfigurers.forEach(c -> c.configureMetricSets(this.metricRegistry));
-    }
-  }
-
-  @Configuration
-  @ConditionalOnClass(MemoryUsageGaugeSet.class)
-  @ConditionalOnProperty(prefix = "spring.metrics.jvm",  name = "enabled", matchIfMissing = true)
-  protected static class JvmConfiguration implements MetricSetConfigurer {
-
-    @Override
-    public void configureMetricSets(MetricRegistry metricRegistry) {
-      metricRegistry.register("gc", new GarbageCollectorMetricSet());
-      metricRegistry.register("buffers",
-                              new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
-      metricRegistry.register("memory", new MemoryUsageGaugeSet());
-      metricRegistry.register("threads", new ThreadStatesGaugeSet());
-    }
-  }
-
-
 
 
 }
