@@ -35,9 +35,6 @@ public class ConsoleReporterConfigurationTest extends AbstractMetricsAutoconfigu
               );
 
     MetricRegistry metricRegistry = getMetricRegistry();
-    Thread.sleep(2000);
-
-
   }
 
   @Configuration
