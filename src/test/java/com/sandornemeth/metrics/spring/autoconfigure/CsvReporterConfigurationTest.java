@@ -15,16 +15,34 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.sandornemeth.metrics.spring.autoconfigure.AbstractMetricsAutoconfigurationTestSupport;
-
+import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.springframework.context.annotation.Configuration;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 public class CsvReporterConfigurationTest extends AbstractMetricsAutoconfigurationTestSupport {
+
+  @Rule public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
   @Test
   public void shouldNotLoadACsvReporterIfNoneConfigured() {
     this.load(CsvReporterTestConfiguration.class);
+  }
+
+  @Test public void shouldLoadACsvReporter() throws InterruptedException {
+    String[] contents = temporaryFolder.getRoot().list();
+    assertThat(contents.length, is(0));
+    this.load(CsvReporterTestConfiguration.class, "spring.metrics.reporters.csv.enabled=true",
+              "spring.metrics.reporters.csv.formatFor=US",
+              "spring.metrics.reporters.csv.reportFolder=" + temporaryFolder.getRoot()
+                  .getAbsolutePath());
+    Thread.sleep(2000);
+    String[] loggedContents = temporaryFolder.getRoot().list((f, name) -> name.endsWith(".csv"));
+    assertThat(loggedContents.length, Matchers.greaterThan(0));
   }
 
   @Configuration

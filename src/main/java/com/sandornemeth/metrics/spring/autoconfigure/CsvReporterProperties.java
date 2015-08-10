@@ -22,25 +22,25 @@ import java.util.Locale;
 /**
  *
  */
-@ConfigurationProperties(value = "spring.metrics.reporter.csv")
+@ConfigurationProperties(value = "spring.metrics.reporters.csv")
 class CsvReporterProperties extends AbstractMetricsProperties {
 
   private Locale formatFor;
-  private String file;
+  private String reportFolder;
 
   public Locale getFormatFor() {
     return formatFor;
   }
 
-  public void setFormatFor(Locale formatFor) {
-    this.formatFor = formatFor;
+  public void setFormatFor(String formatFor) {
+    this.formatFor = Locale.forLanguageTag(formatFor);
   }
 
-  public String getFile() {
-    return file;
+  public String getReportFolder() {
+    return reportFolder;
   }
 
-  public void setFile(String file) {
-    this.file = file;
+  public void setReportFolder(String reportFolder) {
+    this.reportFolder = reportFolder;
   }
 }

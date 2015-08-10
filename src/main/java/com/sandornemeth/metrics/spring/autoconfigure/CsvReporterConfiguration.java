@@ -45,7 +45,7 @@ class CsvReporterConfiguration extends MetricsConfigurerAdapter {
           .convertRatesTo(csvReporterProperties.getRateUnit())
           .filter(MetricFilter.ALL)
           .formatFor(csvReporterProperties.getFormatFor())
-          .build(new File(csvReporterProperties.getFile()));
+          .build(new File(csvReporterProperties.getReportFolder()));
       registerReporter(csvReporter).start(csvReporterProperties.getReportInterval(),
                                           csvReporterProperties.getReportIntervalUnit());
   }
