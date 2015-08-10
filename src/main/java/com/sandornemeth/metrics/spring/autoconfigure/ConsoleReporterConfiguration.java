@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.reporters;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.MetricRegistry;
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnProperty(prefix = "spring.metrics.reporters.console", name = "enabled")
 @EnableConfigurationProperties({ConsoleReporterProperties.class})
-public class ConsoleReporterConfiguration extends MetricsConfigurerAdapter {
+class ConsoleReporterConfiguration extends MetricsConfigurerAdapter {
 
   @Autowired
   private ConsoleReporterProperties consoleReporterProperties;

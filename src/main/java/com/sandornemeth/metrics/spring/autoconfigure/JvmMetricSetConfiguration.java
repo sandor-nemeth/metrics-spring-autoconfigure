@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
@@ -33,7 +33,7 @@ import java.lang.management.ManagementFactory;
 @Configuration
 @ConditionalOnClass(MemoryUsageGaugeSet.class)
 @ConditionalOnProperty(prefix = "spring.metrics.jvm", name = "enabled", matchIfMissing = true)
-public class JvmMetricSetConfiguration implements MetricSetConfigurer {
+class JvmMetricSetConfiguration implements MetricSetConfigurer {
 
   @Override
   public void configureMetricSets(MetricRegistry metricRegistry) {

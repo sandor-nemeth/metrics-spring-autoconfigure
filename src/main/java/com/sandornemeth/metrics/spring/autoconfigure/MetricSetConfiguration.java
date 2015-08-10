@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.MetricRegistry;
 
@@ -34,7 +34,7 @@ import javax.annotation.PostConstruct;
 @Import({
     JvmMetricSetConfiguration.class
 })
-public class MetricSetConfiguration {
+class MetricSetConfiguration {
 
   @Autowired
   private MetricRegistry metricRegistry;

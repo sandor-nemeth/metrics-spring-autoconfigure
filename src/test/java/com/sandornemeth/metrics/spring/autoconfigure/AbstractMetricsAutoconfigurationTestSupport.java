@@ -16,17 +16,10 @@
 package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.MetricRegistryListener;
 
 import org.junit.After;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author sandornemeth

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.reporters;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
  *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public abstract class AbstractMetricsProperties {
+abstract class AbstractMetricsProperties {
 
-  private TimeUnit rateUnit;
-  private TimeUnit durationUnit;
-  private long reportInterval;
-  private TimeUnit reportIntervalUnit;
+  private TimeUnit rateUnit = TimeUnit.SECONDS;
+  private TimeUnit durationUnit = TimeUnit.MILLISECONDS;
+  private long reportInterval = 1;
+  private TimeUnit reportIntervalUnit = TimeUnit.SECONDS;
 
   public TimeUnit getRateUnit() {
     return this.rateUnit;

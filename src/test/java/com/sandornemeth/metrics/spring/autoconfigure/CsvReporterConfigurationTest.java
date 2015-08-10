@@ -15,24 +15,20 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.codahale.metrics.MetricRegistry;
-import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
+import com.sandornemeth.metrics.spring.autoconfigure.AbstractMetricsAutoconfigurationTestSupport;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.junit.Test;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
-/**
- * Annotation-based configuration for the Metrics library.
- */
-@Configuration
-@ConditionalOnClass(EnableMetrics.class)
-@Import(MetricsAnnotationConfiguration.EnableMetricsConfiguration.class)
-class MetricsAnnotationConfiguration {
+public class CsvReporterConfigurationTest extends AbstractMetricsAutoconfigurationTestSupport {
 
-  @EnableMetrics
-  @ConditionalOnMissingBean(value = {MetricRegistry.class})
-  protected static class EnableMetricsConfiguration {}
+  @Test
+  public void shouldNotLoadACsvReporterIfNoneConfigured() {
+    this.load(CsvReporterTestConfiguration.class);
+  }
+
+  @Configuration
+  protected static class CsvReporterTestConfiguration {
+  }
 
 }

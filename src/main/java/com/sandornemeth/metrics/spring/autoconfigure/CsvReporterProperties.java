@@ -13,15 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.codahale.metrics.MetricRegistry;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.Locale;
 
 /**
- * 
+ *
  */
-public interface MetricSetConfigurer {
+@ConfigurationProperties(value = "spring.metrics.reporter.csv")
+class CsvReporterProperties extends AbstractMetricsProperties {
 
-  void configureMetricSets(MetricRegistry metricRegistry);
+  private Locale formatFor;
+  private String file;
 
+  public Locale getFormatFor() {
+    return formatFor;
+  }
+
+  public void setFormatFor(Locale formatFor) {
+    this.formatFor = formatFor;
+  }
+
+  public String getFile() {
+    return file;
+  }
+
+  public void setFile(String file) {
+    this.file = file;
+  }
 }

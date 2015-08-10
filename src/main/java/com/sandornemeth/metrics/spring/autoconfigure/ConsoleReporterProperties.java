@@ -15,22 +15,12 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.codahale.metrics.MetricRegistry;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  *
  */
-@Configuration
-@ConditionalOnClass({MetricRegistry.class})
-@Import({
-    MetricsAnnotationConfiguration.class,
-    MetricSetConfiguration.class,
-    MetricsReporterConfiguration.class
-})
-public class MetricsAutoConfiguration {
+@ConfigurationProperties("spring.metrics.reporters.console")
+class ConsoleReporterProperties extends AbstractMetricsProperties {
 
 }
