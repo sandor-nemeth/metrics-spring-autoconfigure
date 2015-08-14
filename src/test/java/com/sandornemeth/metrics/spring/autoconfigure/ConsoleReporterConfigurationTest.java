@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.reporters;
-
-import com.sandornemeth.metrics.spring.autoconfigure.AbstractMetricsAutoconfigurationTestSupport;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.MetricRegistry;
 

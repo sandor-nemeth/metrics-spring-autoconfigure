@@ -15,9 +15,6 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.sandornemeth.metrics.spring.autoconfigure.metricsets.MetricSetConfiguration;
-import com.sandornemeth.metrics.spring.autoconfigure.reporters.MetricsReporterConfiguration;
-
 import com.codahale.metrics.MetricRegistry;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ConditionalOnClass(EnableMetrics.class)
 @Import(MetricsAnnotationConfiguration.EnableMetricsConfiguration.class)
-public class MetricsAnnotationConfiguration {
+class MetricsAnnotationConfiguration {
 
   @EnableMetrics
   @ConditionalOnMissingBean(value = {MetricRegistry.class})

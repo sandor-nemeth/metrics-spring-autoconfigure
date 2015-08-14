@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.metricsets;
+package com.sandornemeth.metrics.spring.autoconfigure;
+
+import com.sandornemeth.metrics.spring.autoconfigure.MetricSetConfiguration;
+import com.sandornemeth.metrics.spring.autoconfigure.MetricSetConfigurer;
 
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;

@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sandornemeth.metrics.spring.autoconfigure.reporters;
+package com.sandornemeth.metrics.spring.autoconfigure;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- *
+ * {@link ConfigurationProperties Configuration properties} for the {@link
+ * com.codahale.metrics.ConsoleReporter console reporter}.
  */
-@Configuration
-@Import({
-    ConsoleReporterConfiguration.class
-})
-public class MetricsReporterConfiguration {
+@ConfigurationProperties("spring.metrics.reporters.console")
+class ConsoleReporterProperties extends AbstractMetricsReporterProperties {
 
 }
