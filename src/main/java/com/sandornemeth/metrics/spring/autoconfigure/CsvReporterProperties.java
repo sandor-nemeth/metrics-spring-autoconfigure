@@ -15,25 +15,29 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Locale;
 
 /**
- *
+ * {@link ConfigurationProperties Configuration properties} for the {@link
+ * com.codahale.metrics.CsvReporter CSV reporter}.
  */
 @ConfigurationProperties(value = "spring.metrics.reporters.csv")
-class CsvReporterProperties extends AbstractMetricsProperties {
+class CsvReporterProperties extends AbstractMetricsReporterProperties {
 
-  private Locale formatFor;
+  private Locale formatFor = Locale.US;
+
+  @NotBlank
   private String reportFolder;
 
   public Locale getFormatFor() {
     return formatFor;
   }
 
-  public void setFormatFor(String formatFor) {
-    this.formatFor = Locale.forLanguageTag(formatFor);
+  public void setFormatFor(Locale formatFor) {
+    this.formatFor = formatFor;
   }
 
   public String getReportFolder() {

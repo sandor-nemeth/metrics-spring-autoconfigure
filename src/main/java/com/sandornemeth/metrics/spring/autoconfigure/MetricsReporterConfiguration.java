@@ -15,17 +15,76 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
+import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.CsvReporter;
+import com.codahale.metrics.MetricFilter;
+import com.codahale.metrics.MetricRegistry;
+import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
+import java.io.File;
 
 /**
  *
  */
 @Configuration
 @Import({
-    ConsoleReporterConfiguration.class,
-    CsvReporterConfiguration.class
+    MetricsReporterConfiguration.ConsoleReporterConfiguration.class,
+    MetricsReporterConfiguration.CsvReporterConfiguration.class
 })
 class MetricsReporterConfiguration {
+
+  /**
+   * {@link MetricsConfigurerAdapter Metric configurer} for configuring an {@link
+   * com.codahale.metrics.CsvReporter csv reporter}.
+   */
+  @Configuration
+  @ConditionalOnProperty(prefix = "spring.metrics.reporters.console", name = "enabled")
+  @EnableConfigurationProperties({ConsoleReporterProperties.class})
+  protected static class ConsoleReporterConfiguration extends MetricsConfigurerAdapter {
+
+    @Autowired
+    private ConsoleReporterProperties consoleReporterProperties;
+
+    @Override
+    public void configureReporters(MetricRegistry metricRegistry) {
+      ConsoleReporter consoleReporter = ConsoleReporter.forRegistry(metricRegistry)
+          .convertRatesTo(consoleReporterProperties.getRateUnit())
+          .convertDurationsTo(consoleReporterProperties.getDurationUnit())
+          .build();
+      registerReporter(consoleReporter).start(consoleReporterProperties.getReportInterval(),
+                                              consoleReporterProperties.getReportIntervalUnit());
+    }
+  }
+
+  /**
+   *
+   */
+  @Configuration
+  @ConditionalOnProperty(prefix = "spring.metrics.reporters.csv", name = "enabled")
+  @EnableConfigurationProperties(CsvReporterProperties.class)
+  protected static class CsvReporterConfiguration extends MetricsConfigurerAdapter {
+
+    @Autowired
+    private CsvReporterProperties csvReporterProperties;
+
+    @Override
+    public void configureReporters(MetricRegistry metricRegistry) {
+      CsvReporter csvReporter = CsvReporter.forRegistry(metricRegistry)
+          .convertDurationsTo(csvReporterProperties.getDurationUnit())
+          .convertRatesTo(csvReporterProperties.getRateUnit())
+          .filter(MetricFilter.ALL)
+          .formatFor(csvReporterProperties.getFormatFor())
+          .build(new File(csvReporterProperties.getReportFolder()));
+      registerReporter(csvReporter).start(csvReporterProperties.getReportInterval(),
+                                          csvReporterProperties.getReportIntervalUnit());
+    }
+  }
+
 
 }

@@ -16,11 +16,18 @@
 package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.jvm.BufferPoolMetricSet;
+import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
+import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
+import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,11 +35,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 /**
- * @author sandornemeth
+ * Configuration for metric sets.
  */
 @Configuration
 @Import({
-    JvmMetricSetConfiguration.class
+    MetricSetConfiguration.JvmMetricSetConfiguration.class
 })
 class MetricSetConfiguration {
 
@@ -52,4 +59,23 @@ class MetricSetConfiguration {
   public void initializeMetricSets() {
     this.metricSetConfigurers.forEach(c -> c.configureMetricSets(this.metricRegistry));
   }
+
+  /**
+   *
+   */
+  @Configuration
+  @ConditionalOnClass(MemoryUsageGaugeSet.class)
+  @ConditionalOnProperty(prefix = "spring.metrics.jvm", name = "enabled", matchIfMissing = true)
+  protected static class JvmMetricSetConfiguration implements MetricSetConfigurer {
+
+    @Override
+    public void configureMetricSets(MetricRegistry metricRegistry) {
+      metricRegistry.register("gc", new GarbageCollectorMetricSet());
+      metricRegistry.register("buffers",
+                              new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
+      metricRegistry.register("memory", new MemoryUsageGaugeSet());
+      metricRegistry.register("threads", new ThreadStatesGaugeSet());
+    }
+  }
+
 }

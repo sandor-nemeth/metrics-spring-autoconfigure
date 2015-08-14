@@ -18,10 +18,10 @@ package com.sandornemeth.metrics.spring.autoconfigure;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * Abstract base class for {@link org.springframework.boot.context.properties.ConfigurationProperties
+ * @ConfigurationProperties} for {@link com.codahale.metrics.Reporter metrics reporters}.
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
-abstract class AbstractMetricsProperties {
+abstract class AbstractMetricsReporterProperties {
 
   private TimeUnit rateUnit = TimeUnit.SECONDS;
   private TimeUnit durationUnit = TimeUnit.MILLISECONDS;
@@ -29,31 +29,31 @@ abstract class AbstractMetricsProperties {
   private TimeUnit reportIntervalUnit = TimeUnit.SECONDS;
 
   public TimeUnit getRateUnit() {
-    return this.rateUnit;
-  }
-
-  public TimeUnit getDurationUnit() {
-    return this.durationUnit;
-  }
-
-  public long getReportInterval() {
-    return this.reportInterval;
-  }
-
-  public TimeUnit getReportIntervalUnit() {
-    return this.reportIntervalUnit;
+    return rateUnit;
   }
 
   public void setRateUnit(TimeUnit rateUnit) {
     this.rateUnit = rateUnit;
   }
 
+  public TimeUnit getDurationUnit() {
+    return durationUnit;
+  }
+
   public void setDurationUnit(TimeUnit durationUnit) {
     this.durationUnit = durationUnit;
   }
 
+  public long getReportInterval() {
+    return reportInterval;
+  }
+
   public void setReportInterval(long reportInterval) {
     this.reportInterval = reportInterval;
+  }
+
+  public TimeUnit getReportIntervalUnit() {
+    return reportIntervalUnit;
   }
 
   public void setReportIntervalUnit(TimeUnit reportIntervalUnit) {

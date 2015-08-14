@@ -23,9 +23,6 @@ import org.springframework.context.annotation.Configuration;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- * @author sandornemeth
- */
 public class DefaultConfigurationTest extends AbstractMetricsAutoconfigurationTestSupport {
 
   @Test

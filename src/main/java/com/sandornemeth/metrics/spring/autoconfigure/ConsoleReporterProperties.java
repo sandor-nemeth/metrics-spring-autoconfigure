@@ -18,9 +18,10 @@ package com.sandornemeth.metrics.spring.autoconfigure;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- *
+ * {@link ConfigurationProperties Configuration properties} for the {@link
+ * com.codahale.metrics.ConsoleReporter console reporter}.
  */
 @ConfigurationProperties("spring.metrics.reporters.console")
-class ConsoleReporterProperties extends AbstractMetricsProperties {
+class ConsoleReporterProperties extends AbstractMetricsReporterProperties {
 
 }

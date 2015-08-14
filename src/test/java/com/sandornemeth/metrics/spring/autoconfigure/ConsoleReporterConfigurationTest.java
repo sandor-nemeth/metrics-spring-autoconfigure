@@ -15,8 +15,6 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.sandornemeth.metrics.spring.autoconfigure.AbstractMetricsAutoconfigurationTestSupport;
-
 import com.codahale.metrics.MetricRegistry;
 
 import org.junit.Test;
