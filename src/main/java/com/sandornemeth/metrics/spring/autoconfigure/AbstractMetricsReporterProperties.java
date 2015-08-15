@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Abstract base class for {@link org.springframework.boot.context.properties.ConfigurationProperties
- * @ConfigurationProperties} for {@link com.codahale.metrics.Reporter metrics reporters}.
+ * &#64;ConfigurationProperties} for {@link com.codahale.metrics.Reporter metrics reporters}.
  */
 abstract class AbstractMetricsReporterProperties {
 

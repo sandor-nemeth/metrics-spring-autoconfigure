@@ -19,6 +19,7 @@ import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.CsvReporter;
 import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Slf4jReporter;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ import java.io.File;
 @Configuration
 @Import({
     MetricsReporterConfiguration.ConsoleReporterConfiguration.class,
-    MetricsReporterConfiguration.CsvReporterConfiguration.class
+    MetricsReporterConfiguration.CsvReporterConfiguration.class,
+    MetricsReporterConfiguration.Slf4jReporterConfiguration.class
 })
 class MetricsReporterConfiguration {
 
@@ -86,5 +88,27 @@ class MetricsReporterConfiguration {
     }
   }
 
+  @Configuration
+  @ConditionalOnProperty(prefix = "spring.metrics.reporters.slf4j", name = "enabled")
+  @EnableConfigurationProperties(Slf4jReporterProperties.class)
+  protected static class Slf4jReporterConfiguration extends MetricsConfigurerAdapter {
 
+    @Autowired
+    private Slf4jReporterProperties slf4jReporterProperties;
+
+    @Override
+    public void configureReporters(MetricRegistry metricRegistry) {
+      Slf4jReporter reporter = Slf4jReporter.forRegistry(metricRegistry)
+          .convertDurationsTo(slf4jReporterProperties.getDurationUnit())
+          .convertRatesTo(slf4jReporterProperties.getRateUnit())
+          .outputTo(slf4jReporterProperties.getLogger())
+          .withLoggingLevel(slf4jReporterProperties.getLoggingLevel())
+          .markWith(slf4jReporterProperties.getMarker())
+          .prefixedWith(slf4jReporterProperties.getPrefix())
+          .filter(MetricFilter.ALL)
+          .build();
+      registerReporter(reporter).start(slf4jReporterProperties.getReportInterval(),
+                                       slf4jReporterProperties.getReportIntervalUnit());
+    }
+  }
 }

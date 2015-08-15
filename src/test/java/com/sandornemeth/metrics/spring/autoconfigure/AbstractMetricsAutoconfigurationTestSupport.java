@@ -21,9 +21,6 @@ import org.junit.After;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-/**
- * @author sandornemeth
- */
 public abstract class AbstractMetricsAutoconfigurationTestSupport {
 
   protected AnnotationConfigApplicationContext context;
