@@ -15,11 +15,11 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
+import com.sandornemeth.metrics.spring.autoconfigure.outputcaptor.OutputCaptor;
+
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 
 import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -29,25 +29,24 @@ import java.util.Set;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
-public class ReporterTest {
+public abstract class ReporterTestCaseBase {
 
   protected AnnotationConfigApplicationContext context;
-  protected OutputCaptor outputCaptor = new StdoutCaptor();
 
-  @Before
-  public void prepare() {
+  abstract OutputCaptor getOutputCaptor();
+
+  @After
+  public void cleanUp() throws Exception {
+    if (null != context) {
+      context.close();
+    }
   }
 
-  @Test
-  public void test() throws Exception {
+  protected void executeReporterTest(int waitInMillis, String... environment) throws Exception {
+    OutputCaptor outputCaptor = getOutputCaptor();
     outputCaptor.start();
-    load(TestConf.class,
-         "spring.metrics.reporters.console.enabled:true",
-         "spring.metrics.reporters.console.rateUnit:SECONDS",
-         "spring.metrics.reporters.console.durationUnit:MILLISECONDS",
-         "spring.metrics.reporters.console.reportInterval:100",
-         "spring.metrics.reporters.console.reportIntervalUnit:MILLISECONDS");
-    Thread.sleep(200);
+    load(TestConf.class, environment);
+    Thread.sleep(waitInMillis);
     outputCaptor.close();
     String output = outputCaptor.get();
     verifyRegisteredJvmMetrics(output);
@@ -73,17 +72,8 @@ public class ReporterTest {
     return applicationContext;
   }
 
-  @After
-  public void cleanUp() throws Exception {
-    if (null != context) {
-      context.close();
-    }
-
-  }
-
   @Configuration
   protected static class TestConf {
 
   }
-
 }

@@ -1,19 +1,25 @@
 /**
  * Copyright (C) 2015 Sandor Nemeth (sandor.nemeth.1986@gmail.com)
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
+import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.CsvReporter;
+import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
@@ -27,6 +33,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,15 +47,56 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ConditionalOnClass({MetricRegistry.class})
 @Import(MetricsAnnotationConfiguration.class)
-@EnableConfigurationProperties(MetricConfigurationProperties.class)
+@EnableConfigurationProperties(MetricsConfigurationProperties.class)
 public class MetricsAutoConfiguration {
 
   @Configuration
   protected static class ReporterConfigurer extends MetricsConfigurerAdapter {
 
+    @Autowired
+    private MetricsConfigurationProperties metricsConfigurationProperties;
+
     @Override
     public void configureReporters(MetricRegistry metricRegistry) {
-      super.configureReporters(metricRegistry);
+      configureConsoleReporters(metricRegistry);
+      configureCsvReporters(metricRegistry);
+    }
+
+    private void configureConsoleReporters(MetricRegistry metricRegistry) {
+      metricsConfigurationProperties.getReporters().getConsole().forEach(r -> {
+        ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry)
+            .convertDurationsTo(r.getDurationUnit())
+            .convertRatesTo(r.getRateUnit())
+            .filter(MetricFilter.ALL)
+            .build();
+        this.registerReporter(reporter).start(r.getReportInterval(), r.getReportIntervalUnit());
+      });
+    }
+
+    private void  configureCsvReporters(MetricRegistry metricRegistry) {
+      metricsConfigurationProperties.getReporters().getCsv().forEach(r -> {
+        CsvReporter reporter = CsvReporter.forRegistry(metricRegistry)
+            .filter(MetricFilter.ALL)
+            .convertDurationsTo(r.getDurationUnit())
+            .convertRatesTo(r.getRateUnit())
+            .formatFor(r.getFormatFor())
+            .build(new File(r.getReportFolder()));
+        this.registerReporter(reporter).start(r.getReportInterval(), r.getReportIntervalUnit());
+      });
+    }
+
+    private void configureSlf4jReporters(MetricRegistry metricRegistry) {
+      metricsConfigurationProperties.getReporters().getSlf4j().forEach(r -> {
+        Slf4jReporter reporter = Slf4jReporter.forRegistry(metricRegistry)
+            .convertDurationsTo(r.getDurationUnit())
+            .convertRatesTo(r.getRateUnit())
+            .outputTo(r.getLogger())
+            .withLoggingLevel(r.getLoggingLevel())
+            .markWith(r.getMarker())
+            .prefixedWith(r.getPrefix())
+            .build();
+        this.registerReporter(reporter).start(r.getReportInterval(), r.getReportIntervalUnit());
+      });
     }
   }
 

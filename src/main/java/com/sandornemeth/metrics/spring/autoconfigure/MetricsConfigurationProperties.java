@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ import lombok.Setter;
 @ConfigurationProperties("spring.metrics")
 @Getter
 @Setter
-public class MetricConfigurationProperties {
+public class MetricsConfigurationProperties {
 
   private Reporters reporters;
 
