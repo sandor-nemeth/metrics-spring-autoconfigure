@@ -15,9 +15,6 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.sandornemeth.metrics.spring.autoconfigure.MetricSetConfiguration;
-import com.sandornemeth.metrics.spring.autoconfigure.MetricSetConfigurer;
-
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -31,9 +28,9 @@ public class MetricSetConfigurationTest {
 
   @Test
   public void testNullListPassedToSetMetricSetConfigurers() {
-    MetricSetConfiguration
+    MetricsAutoConfiguration.MetricSetConfiguration
         metricSetConfiguration =
-        new MetricSetConfiguration();
+        new MetricsAutoConfiguration.MetricSetConfiguration();
     metricSetConfiguration.setMetricSetConfigurers(null);
     List<MetricSetConfigurer> metricSetConfigurers =
         (List<MetricSetConfigurer>) ReflectionTestUtils

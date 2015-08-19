@@ -15,13 +15,12 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+public interface OutputCaptor {
 
-/**
- * {@link ConfigurationProperties Configuration properties} for the {@link
- * com.codahale.metrics.ConsoleReporter console reporter}.
- */
-@ConfigurationProperties("spring.metrics.reporters.console")
-class ConsoleReporterProperties extends AbstractMetricsReporterProperties {
+  void start();
+
+  String get();
+
+  void close() throws Exception;
 
 }
