@@ -60,6 +60,7 @@ public class MetricsAutoConfiguration {
     public void configureReporters(MetricRegistry metricRegistry) {
       configureConsoleReporters(metricRegistry);
       configureCsvReporters(metricRegistry);
+      configureSlf4jReporters(metricRegistry);
     }
 
     private void configureConsoleReporters(MetricRegistry metricRegistry) {
