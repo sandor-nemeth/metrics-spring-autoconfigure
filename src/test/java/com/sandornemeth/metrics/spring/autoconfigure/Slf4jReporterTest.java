@@ -17,7 +17,6 @@ package com.sandornemeth.metrics.spring.autoconfigure;
 
 import com.sandornemeth.metrics.spring.autoconfigure.outputcaptor.LogbackCaptor;
 import com.sandornemeth.metrics.spring.autoconfigure.outputcaptor.OutputCaptor;
-import com.sandornemeth.metrics.spring.autoconfigure.outputcaptor.StdoutCaptor;
 
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
