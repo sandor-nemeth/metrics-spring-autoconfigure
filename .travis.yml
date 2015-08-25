@@ -8,3 +8,7 @@ after_success:
 
 jdk:
   - oraclejdk8
+
+branches:
+  except:
+    - travis
