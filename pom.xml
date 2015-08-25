@@ -54,13 +54,6 @@
     <tag>HEAD</tag>
   </scm>
 
-  <distributionManagement>
-    <repository>
-      <id>bintray</id>
-      <url>https://api.bintray.com/maven/sandor_nemeth/maven/metrics-spring-autoconfigure</url>
-    </repository>
-  </distributionManagement>
-
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
