@@ -15,28 +15,46 @@
  */
 package com.sandornemeth.metrics.spring.autoconfigure;
 
-import com.codahale.metrics.MetricRegistry;
+import com.sandornemeth.metrics.spring.autoconfigure.outputcaptor.OutputCaptor;
+
+import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 
 import org.junit.After;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 
-/**
- * @author sandornemeth
- */
-public abstract class AbstractMetricsAutoconfigurationTestSupport {
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
+
+public abstract class ReporterTestCaseBase {
 
   protected AnnotationConfigApplicationContext context;
 
+  abstract OutputCaptor getOutputCaptor();
+
   @After
-  public void close() {
-    if (null != this.context) {
-      this.context.close();
+  public void cleanUp() throws Exception {
+    if (null != context) {
+      context.close();
     }
   }
 
-  protected MetricRegistry getMetricRegistry() {
-    return this.context.getBean(MetricRegistry.class);
+  protected void executeReporterTest(int waitInMillis, String... environment) throws Exception {
+    OutputCaptor outputCaptor = getOutputCaptor();
+    outputCaptor.start();
+    load(TestConf.class, environment);
+    Thread.sleep(waitInMillis);
+    outputCaptor.close();
+    String output = outputCaptor.get();
+    verifyRegisteredJvmMetrics(output);
+  }
+
+  protected void verifyRegisteredJvmMetrics(String output) {
+    Set<String> registeredMemoryUsageGaugeKeys = new MemoryUsageGaugeSet().getMetrics().keySet();
+    registeredMemoryUsageGaugeKeys.forEach(k -> assertThat(output, containsString(k)));
   }
 
   protected void load(Class<?> config, String... environment) {
@@ -54,5 +72,8 @@ public abstract class AbstractMetricsAutoconfigurationTestSupport {
     return applicationContext;
   }
 
+  @Configuration
+  protected static class TestConf {
 
+  }
 }
