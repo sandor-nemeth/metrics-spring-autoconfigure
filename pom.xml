@@ -48,19 +48,12 @@
 
   <scm>
     <url>https://github.com/sandor-nemeth/metrics-spring-autoconfigure</url>
-    <connection>scm:git:git://github.com/sandor-nemeth/metrics-spring-autoconfigure.git</connection>
-    <developerConnection>scm:git:git@github.com:sandor-nemeth/metrics-spring-autoconfigure.git
+    <connection>scm:git:git://github.com/sandor-nemeth/spring-metrics-autoconfigure.git</connection>
+    <developerConnection>scm:git:git@github.com:sandor-nemeth/spring-metrics-autoconfigure.git
     </developerConnection>
     <tag>HEAD</tag>
   </scm>
-
-  <distributionManagement>
-    <repository>
-      <id>bintray</id>
-      <url>https://api.bintray.com/maven/sandor_nemeth/maven/spring-metrics-autoconfigure;publish=1</url>
-    </repository>
-  </distributionManagement>
-
+  
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

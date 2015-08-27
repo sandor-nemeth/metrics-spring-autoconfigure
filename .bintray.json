@@ -1,0 +1,21 @@
+{
+  "package": {
+    "name": "metrics-spring-autoconfigure",
+    "repo": "maven",
+    "subject": "sandor-nemeth"
+  },
+
+  "version": {
+    "name": "0.0.1",
+    "desc": "First version",
+    "released": "2015-8-27",
+    "vcs_tag": "0.0.1",
+    "attributes": []
+  },
+
+  "files":
+  [
+    {"includePattern": "target/metrics-spring-autoconfigure-*.jar"}
+  ],
+  "publish": true
+}
