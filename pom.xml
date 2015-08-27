@@ -55,6 +55,13 @@
     </developerConnection>
   </scm>
 
+  <distributionManagement>
+    <repository>
+      <id>bintray</id>
+      <url>https://api.bintray.com/maven/sandor_nemeth/maven</url>
+    </repository>
+  </distributionManagement>
+
   <properties>
     <targetJdk>1.8</targetJdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -215,6 +222,12 @@
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <version>3.1.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.2</version>
       </plugin>
     </plugins>
   </build>
