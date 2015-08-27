@@ -7,7 +7,7 @@ branches:
 script: mvn clean verify
 after_success:
 - mvn clean cobertura:cobertura coveralls:report
-- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn source:jar mvn javadoc:jar deploy --settings travis-deploy-settings.xml
+- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn source:jar javadoc:jar deploy --settings travis-deploy-settings.xml
 env:
   global:
   - secure: lsZe2AT+F69ajXo6ca+tOfAVCByIY9Xl+HDc4bitWqu7NlpcRj4aTIysF6dxE/vd4p3g+tjuavND9Z3CiWXh4CR+uiHvyu8R6oBdZodVrrmL64a79lgD79JbHhdcHTsPUbdMFukHXym79949tugxl1G1FenozIYgH8mhFWIRWvaQRvL7iQ8p9geYnAgfqNgeLrrP++Qs9Ytfqszg3L+mr8dAqakwUjo0m6RHVSaiKV5IzKbYh4BvQzWxrYm5hyKPrfVZpNhPFnxf2gtgOvtjMlUpFQk2eTSaAhgDw/7h6PdKc/K8ft06sbeHDuyLkHWV7bkuC2946ZWUyXyQLNE+BLpkSxRWx3ob5jPtfDwZSo6wTMXT9iCPqf7g/Ti6f8qkgqjaeHw9x97LdWj4wx2cgX97OX+jf/IeGyB+U9TVL7nBm83b20aVlUKt6RVEvHWKUvnq1p3mPOQRei7R97otWxGhykIYX5q1k1uMJSlAhLq51a7W9X3uLVrrPa1p6Rsma646Mg11mkVy8ux1sYU+OHgQnNLU7UKTfAQDYAW/P0tUBP87I2Y2vNaHL0g2/5WCUpzLSYaqGOAt25b+9+CH1QpnwVXmCiGIcBu4xcuilGjxNBnBL3/NHnNwyFP+LofU0KCxEjvGST+YlPLqaMeLMjC3fwMopmgcOkCuThmAT6g=
