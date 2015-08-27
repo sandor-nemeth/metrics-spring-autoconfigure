@@ -57,7 +57,7 @@
   <distributionManagement>
     <repository>
       <id>bintray</id>
-      <url>https://api.bintray.com/maven/sandor_nemeth/maven/spring-metrics-autoconfigure</url>
+      <url>https://api.bintray.com/maven/sandor_nemeth/maven/spring-metrics-autoconfigure;publish=1</url>
     </repository>
   </distributionManagement>
 
