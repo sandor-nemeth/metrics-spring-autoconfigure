@@ -6,7 +6,8 @@ branches:
   - travis
 script: mvn clean verify
 after_success:
-- mvn clean cobertura:cobertura coveralls:report
+- mvn cobertura:cobertura coveralls:report
+- mvn source:jar javadoc:jar package
 deploy:
   provider: bintray
   file: .bintray.json
