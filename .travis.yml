@@ -12,9 +12,9 @@ deploy:
   provider: bintray
   file: .bintray.json
   user: sandor-nemeth
+  skip_cleanup: true
   key:
     secure: DBZ3Cs0bNYnVK0Uc6dGTIfzKKIrwLvEUHvQvwL0q3znsX5D3+izcGJweA/7lVrNaxngCWQJvTV8mhPXTUcDpATNXK8/2nQKHC7ZGpf4tQaH8FTZhwJaBdMMA6oKzsSptyoElJqBj71tjqTOWQsLZHHTwwvD7K213ILlSN0nwZasgoCithTvRncytil/U6UhP5GbRsaT5PdfeUa+VNEs/oNZOe9IV7P1pJYX9pxi9DGHz3DM/o5wffQe515DzJqRViuMb/LjHTliuvAW//1rrqmqMj6XeqIqUwMv0dmmmbw7G4tTu+gkoKqs/PPIHIy1Onz9SatcURoze3ZDqr5f5S1nqJIE6w7AdYvTNcgBRHcquGPRBQXqHMqaG3uGZ6jKY+97Cdmk1n6oVF+BOM652M+fXe5VYxNqPce1it//927ofxk4bKoy9uLFFOcK4JPtTnQnSF4jaYNLeA2EovcuATYv3EBce+uX0UkloG2XGPU7Ajb3fi2ENfirxqn0aRqWOVnHElVWWWjtiYFtPUvASw1w2gdC6BhzACN565O6mJlAm5i8qn3rezoGktdzGb/lsbczEYpYDjTDW3uJ2O+5x6UyC0SvNKFuIiUJ9i90juyOyuIM9L1Rzca5xODkInE5nM3ZdptP93T4NFZAgzxCF/oi0jPUn0TjPwtrNztbXjrc=
-  dry-run: true
   on:
     tags: true
 env:
