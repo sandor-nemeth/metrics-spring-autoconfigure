@@ -15,7 +15,7 @@
 
   "files":
   [
-    {"includePattern": ".*/target/(metrics-spring-autoconfigure.*\.jar)", "uploadPattern": "$1"}
+    {"includePattern": "target/(metrics-spring-autoconfigure.*\.jar)", "uploadPattern": "$1"}
   ],
   "publish": true
 }
