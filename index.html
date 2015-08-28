@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Metrics-spring-autoconfigure by sandor-nemeth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Metrics-spring-autoconfigure</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/sandor-nemeth/metrics-spring-autoconfigure" class="btn">View on GitHub</a>
+      <a href="https://github.com/sandor-nemeth/metrics-spring-autoconfigure/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/sandor-nemeth/metrics-spring-autoconfigure/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="spring-boot-autoconfigure" class="anchor" href="#spring-boot-autoconfigure" aria-hidden="true"><span class="octicon octicon-link"></span></a>spring-boot-autoconfigure</h2>
+
+<p><a href="https://travis-ci.org/sandor-nemeth/metrics-spring-autoconfigure"><img src="https://travis-ci.org/sandor-nemeth/metrics-spring-autoconfigure.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/sandor-nemeth/metrics-spring-autoconfigure?branch=master"><img src="https://coveralls.io/repos/sandor-nemeth/metrics-spring-autoconfigure/badge.svg?branch=master&amp;service=github" alt="Coverage Status"></a>
+<a href="http://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg" alt="License"></a>
+<a href="https://bintray.com/sandor-nemeth/maven/metrics-spring-autoconfigure/_latestVersion"> <img src="https://api.bintray.com/packages/sandor-nemeth/maven/metrics-spring-autoconfigure/images/download.svg" alt="Download"> </a></p>
+
+<p>Spring-Boot autoconfiguration library for the 
+<a href="https://github.com/ryantenney/metrics-spring">metrics-spring</a> library.</p>
+
+<p><strong>This documentation is only for the configuration of the plugin. For the possibilities of the 
+<a href="https://github.com/ryantenney/metrics-spring">metrics-spring library</a> library, and the 
+<a href="http://metrics.dropwizard.io/">Dropwizard Metrics</a> library itself please see the corresponding 
+pages themselves.</strong></p>
+
+<p><strong>This project is under active development, please expect that until v1.0.0 breaking changes can
+ be submitted.</strong></p>
+
+<h3>
+<a id="where-to-get-it" class="anchor" href="#where-to-get-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>Where to get it</h3>
+
+<p>The project is available currently on bintray:</p>
+
+<div class="highlight highlight-xml"><pre><span class="pl-c">&lt;!-- Repository configuration --&gt;</span>
+&lt;<span class="pl-ent">repository</span>&gt;
+  &lt;<span class="pl-ent">id</span>&gt;bintray-sandor-nemeth-maven&lt;/<span class="pl-ent">id</span>&gt;
+  &lt;<span class="pl-ent">name</span>&gt;bintray&lt;/<span class="pl-ent">name</span>&gt;
+  &lt;<span class="pl-ent">url</span>&gt;http://dl.bintray.com/sandor-nemeth/maven&lt;/<span class="pl-ent">url</span>&gt;
+  &lt;<span class="pl-ent">snapshots</span>&gt;
+    &lt;<span class="pl-ent">enabled</span>&gt;false&lt;/<span class="pl-ent">enabled</span>&gt;
+  &lt;/<span class="pl-ent">snapshots</span>&gt;
+&lt;/<span class="pl-ent">repository</span>&gt;
+
+<span class="pl-c">&lt;!-- Artifact --&gt;</span>
+&lt;<span class="pl-ent">dependency</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;com.sandornemeth&lt;/<span class="pl-ent">groupId</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;metrics-spring-autoconfigure&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;0.0.1&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h3>
+<a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use it</h3>
+
+<p>Use it with Spring Boot's <code>application.yml</code> or <code>application
+.properties</code>. The examples below are in yaml, but they can be easily ported to properties. </p>
+
+<p>All <code>*Unit</code> properties are constants from the <code>java.util.concurrent.TimeUnit</code> class, and 
+now nothing else is supported.</p>
+
+<p>As every reporter-type is an array, you are welcome to configure as many reporters, as you want.</p>
+
+<div class="highlight highlight-yml"><pre><span class="pl-s"><span class="pl-ent">spring:</span></span>
+  <span class="pl-s"><span class="pl-ent">metrics:</span></span>
+    <span class="pl-s"><span class="pl-ent">reporters:</span></span>
+      <span class="pl-s"><span class="pl-ent">console:</span></span>
+        <span class="pl-s">-</span>
+          <span class="pl-s"><span class="pl-ent">rateUnit:</span> <span class="pl-s">SECONDS</span></span>
+          <span class="pl-s"><span class="pl-ent">durationUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+          <span class="pl-c1"><span class="pl-ent">reportInterval:</span> 100</span>
+          <span class="pl-s"><span class="pl-ent">reportIntervalUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+      <span class="pl-s"><span class="pl-ent">csv:</span></span>
+        <span class="pl-s">- </span>
+          <span class="pl-s"><span class="pl-ent">rateUnit:</span> <span class="pl-s">SECONDS</span></span>
+          <span class="pl-s"><span class="pl-ent">durationUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+          <span class="pl-c1"><span class="pl-ent">reportInterval:</span> 100</span>
+          <span class="pl-s"><span class="pl-ent">reportIntervalUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+          <span class="pl-s"><span class="pl-ent">formatFor:</span> <span class="pl-s">US                             </span></span><span class="pl-c"># java.util.Locale language tag</span>
+          <span class="pl-s"><span class="pl-ent">reportFolder:</span> <span class="pl-s">/report_dir                 </span></span><span class="pl-c"># absolute path to the report folder</span>
+      <span class="pl-s"><span class="pl-ent">slf4j:</span></span>
+        <span class="pl-s">- </span>
+          <span class="pl-s"><span class="pl-ent">rateUnit:</span> <span class="pl-s">SECONDS</span></span>
+          <span class="pl-s"><span class="pl-ent">durationUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+          <span class="pl-c1"><span class="pl-ent">reportInterval:</span> 100</span>
+          <span class="pl-s"><span class="pl-ent">reportIntervalUnit:</span> <span class="pl-s">MILLISECONDS</span></span>
+          <span class="pl-s"><span class="pl-ent">prefix:</span> <span class="pl-s">prefix</span></span>
+          <span class="pl-s"><span class="pl-ent">logger:</span> <span class="pl-s">com.sandornemeth.MetricReport</span></span>
+          <span class="pl-s"><span class="pl-ent">loggingLevel:</span> <span class="pl-s">WARN                        </span></span><span class="pl-c"># values: TRACE, DEBUG, INFO, WARN, ERROR</span>
+          <span class="pl-s"><span class="pl-ent">marker:</span> <span class="pl-s">marker</span></span></pre></div>
+
+<p>Also, if the <code>metrics-jvm</code> library is included, metrics for the JVM are published.</p>
+
+<h3>
+<a id="what-is-to-come" class="anchor" href="#what-is-to-come" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is to come:</h3>
+
+<ul>
+<li>Support for Graphite and Ganglia reporters</li>
+<li>Metric filter configuration (regex and custom MetricFilter based on Spring beans)</li>
+<li>Custom naming for the JVM metrics</li>
+<li>I am not quite sure at the moment, what kind of health checks and instrumentations can be 
+supported via this configuration, but I'll investigate it later.</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/sandor-nemeth/metrics-spring-autoconfigure">Metrics-spring-autoconfigure</a> is maintained by <a href="https://github.com/sandor-nemeth">sandor-nemeth</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
