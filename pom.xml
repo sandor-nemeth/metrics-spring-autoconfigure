@@ -4,7 +4,7 @@
   <groupId>com.sandornemeth</groupId>
   <artifactId>metrics-spring-autoconfigure</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <!-- Project Description -->
   <name>metrics-spring-autoconfigure</name>
