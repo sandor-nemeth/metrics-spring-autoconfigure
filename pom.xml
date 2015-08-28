@@ -4,7 +4,7 @@
   <groupId>com.sandornemeth</groupId>
   <artifactId>metrics-spring-autoconfigure</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.8-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <!-- Project Description -->
   <name>metrics-spring-autoconfigure</name>
@@ -57,7 +57,7 @@
   <distributionManagement>
     <repository>
       <id>bintray</id>
-      <url>https://api.bintray.com/maven/sandor_nemeth/maven/spring-metrics-autoconfigure</url>
+      <url>https://api.bintray.com/maven/sandor_nemeth/maven/metrics-spring-autoconfigure</url>
     </repository>
   </distributionManagement>
 
