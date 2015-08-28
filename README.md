@@ -35,7 +35,7 @@ The project is available currently on bintray:
 <dependency>
   <groupId>com.sandornemeth</groupId>
   <artifactId>metrics-spring-autoconfigure</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
