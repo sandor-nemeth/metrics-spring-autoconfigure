@@ -15,7 +15,14 @@
 
   "files":
   [
-    {"includePattern": "target/(metrics-spring-autoconfigure.*\.jar)", "uploadPattern": "com/sandornemeth/metrics-spring-autoconfigure/0.0.1/$1"}
+    {
+      "includePattern": "target/(metrics-spring-autoconfigure.*\.jar)",
+      "uploadPattern": "com/sandornemeth/metrics-spring-autoconfigure/0.0.1/$1"
+    },
+    {
+      "includePattern": "(pom.xml)",
+      "uploadPattern": "com/sandornemeth/metrics-spring-autoconfigure/0.0.1/$1"
+    }
   ],
   "publish": false
 }
