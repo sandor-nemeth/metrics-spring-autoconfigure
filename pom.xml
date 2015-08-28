@@ -4,7 +4,7 @@
   <groupId>com.sandornemeth</groupId>
   <artifactId>metrics-spring-autoconfigure</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
   <!-- Project Description -->
   <name>metrics-spring-autoconfigure</name>
@@ -51,7 +51,7 @@
     <connection>scm:git:git://github.com/sandor-nemeth/metrics-spring-autoconfigure.git</connection>
     <developerConnection>scm:git:git@github.com:sandor-nemeth/metrics-spring-autoconfigure.git
     </developerConnection>
-    <tag>HEAD</tag>
+    <tag>0.0.1</tag>
   </scm>
 
   <distributionManagement>
