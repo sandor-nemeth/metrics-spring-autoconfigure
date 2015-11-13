@@ -103,10 +103,23 @@ public class MetricsConfigurationProperties {
 
   }
 
-  @Getter @Setter
+  @Getter
+  @Setter
   public static class GraphiteReporterProperties extends ReporterPropertiesBase {
+
     @NotBlank
     private String graphiteHost;
     private int graphitePort;
   }
+
+  @Getter
+  @Setter
+  public static class MetricFilterDefinition {
+
+    public static enum Type {ALL, BEAN, START_WITH, REGEX}
+
+    private Type type;
+    private String expression;
+  }
+
 }
